@@ -34,6 +34,21 @@ class WorldModel:
         occ_grid.set_cell(self.occupancy, pt, entity)
         self.entities.append(entity)
 
+   def move_entity(self, entity, pt):
+       tiles = []
+       if self.within_bounds(pt):
+           old_pt = entity.get_position()
+           occ_grid.set_cell(self.occupancy, old_pt, None)
+           tiles.append(old_pt)
+           occ_grid.set_cell(self.occupancy, pt, entity)
+           tiles.append(pt)
+           entity.set_position(pt)
+       return tiles
+
+
+
+
+
 
    def remove_entity_at(self, pt):
       if (self.within_bounds(pt) and
